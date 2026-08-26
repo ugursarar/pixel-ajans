@@ -206,7 +206,7 @@
   .brand-logo-card img{ max-width:100%; max-height:100%; object-fit:contain; display:block; }
   .ref-grid{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
   .ref-badge{
-    font-family:var(--display); font-weight:600; font-size:14.5px; color:var(--muted);
+    font-family:var(--display); font-weight:600; font-size:14.5px; color:var(--ink);
     border:1px solid var(--border-dark); border-radius:999px; padding:10px 20px;
     background:var(--panel-dark); transition:border-color .15s ease, color .15s ease;
   }
@@ -313,6 +313,28 @@
   .form-submit[data-sent="true"]{ background:var(--accent-3); border-color:var(--accent-3); }
   .form-note{ font-size:12px; color:var(--muted); margin-top:10px; text-align:center; }
 
+  /* ---------- Hızlı ön görüşme kutusu (hero CTA) ---------- */
+  .qm-overlay{
+    position:fixed; inset:0; background:rgba(10,7,4,0.72); backdrop-filter:blur(3px);
+    z-index:300; display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .qm-overlay.open{ display:flex; }
+  .qm-box{
+    position:relative; width:100%; max-width:420px;
+    background:var(--panel-dark); border:1px solid var(--border-dark); border-radius:18px;
+    padding:32px 28px 28px;
+  }
+  .qm-close{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%;
+    border:1px solid var(--border-dark); background:transparent; color:var(--muted);
+    font-size:16px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .qm-close:hover{ border-color:var(--accent); color:var(--ink); }
+  .qm-box .eyebrow{ margin-bottom:10px; }
+  .qm-box h3{ font-family:var(--display); font-size:22px; font-weight:700; margin-bottom:6px; color:var(--ink); }
+  .qm-box .qm-sub{ color:var(--muted); font-size:13.5px; margin-bottom:20px; line-height:1.55; }
+
   .bottom-bar{
     margin-top:70px; padding-top:26px; border-top:1px solid var(--border-dark);
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
@@ -399,7 +421,7 @@
         <h1>Reklam bütçenizi <em>ölçülebilir büyümeye</em> çeviriyoruz.</h1>
         <p class="sub">Google, Meta, TikTok, LinkedIn ve programatik kanallarda veriye dayalı reklam stratejileriyle markanızın büyümesini hızlandırıyoruz.</p>
         <div class="cta-row">
-          <a href="#iletisim" class="btn-primary">Ücretsiz Ön Görüşme →</a>
+          <a href="#iletisim" class="btn-primary" id="heroCtaBtn">Ücretsiz Ön Görüşme →</a>
           <a href="#hizmetler" class="btn-secondary">Hizmetleri İncele</a>
         </div>
       </div>
@@ -642,6 +664,27 @@
   </div>
 </footer>
 
+<div class="qm-overlay" id="qmOverlay">
+  <div class="qm-box">
+    <button type="button" class="qm-close" id="qmClose" aria-label="Kapat">✕</button>
+    <span class="eyebrow"><span class="dot"></span>ÜCRETSİZ ÖN GÖRÜŞME</span>
+    <h3>Sizi hemen arayalım.</h3>
+    <p class="qm-sub">İsminizi ve kısa bir mesajınızı bırakın, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
+    <form id="qmForm">
+      <div class="field">
+        <label for="qm-name">İsim Soyisim</label>
+        <input id="qm-name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="qm-msg">Mesajınız</label>
+        <textarea id="qm-msg" placeholder="Kısaca ne konuda görüşmek istersiniz?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="qmSubmit">Gönder</button>
+      <p class="form-note">Bu form şu an bir arka uca bağlı değildir — gönderim yalnızca arayüzde gösterilir.</p>
+    </form>
+  </div>
+</div>
+
 <script>
 (function(){
   var toggle = document.getElementById('navToggle');
@@ -760,6 +803,43 @@
     submitBtn.textContent = 'Talebiniz Alındı ✓';
     submitBtn.setAttribute('data-sent', 'true');
     submitBtn.disabled = true;
+  });
+
+  // Hızlı ön görüşme kutusu (hero CTA)
+  var heroCta = document.getElementById('heroCtaBtn');
+  var qmOverlay = document.getElementById('qmOverlay');
+  var qmClose = document.getElementById('qmClose');
+  var qmForm = document.getElementById('qmForm');
+  var qmSubmit = document.getElementById('qmSubmit');
+
+  function qmOpen(e){
+    e.preventDefault();
+    qmOverlay.classList.add('open');
+    document.getElementById('qm-name').focus();
+  }
+  function qmCloseFn(){
+    qmOverlay.classList.remove('open');
+  }
+  heroCta.addEventListener('click', qmOpen);
+  qmClose.addEventListener('click', qmCloseFn);
+  qmOverlay.addEventListener('click', function(e){
+    if (e.target === qmOverlay) qmCloseFn();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && qmOverlay.classList.contains('open')) qmCloseFn();
+  });
+  qmForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    qmSubmit.textContent = 'Talebiniz Alındı ✓';
+    qmSubmit.setAttribute('data-sent', 'true');
+    qmSubmit.disabled = true;
+    setTimeout(function(){
+      qmCloseFn();
+      qmForm.reset();
+      qmSubmit.textContent = 'Gönder';
+      qmSubmit.removeAttribute('data-sent');
+      qmSubmit.disabled = false;
+    }, 1800);
   });
 })();
 </script>
