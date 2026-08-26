@@ -112,13 +112,14 @@
     transition:transform .15s ease, box-shadow .15s ease;
   }
   .nav-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 24px -8px var(--accent-soft); }
-  .nav-social{ display:flex; align-items:center; gap:10px; }
-  .nav-social a{
-    width:38px; height:38px; border:1px solid var(--border-light); border-radius:10px;
-    display:flex; align-items:center; justify-content:center; color:var(--ink-light); font-size:13px;
-    background:rgba(247,243,236,0.97); transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  .nav-whatsapp{
+    width:42px; height:42px; border-radius:11px; background:#25D366; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px -6px rgba(37,211,102,0.6);
+    transition:transform .15s ease, box-shadow .15s ease;
   }
-  .nav-social a:hover{ border-color:var(--accent-3); color:var(--accent-3); transform:translateY(-1px); }
+  .nav-whatsapp svg{ width:22px; height:22px; }
+  .nav-whatsapp:hover{ transform:translateY(-1px); box-shadow:0 10px 22px -6px rgba(37,211,102,0.75); }
 
   .nav-toggle{
     display:none; background:none; border:1px solid var(--border-light); border-radius:8px;
@@ -371,7 +372,7 @@
     .nav-links.open{ display:flex; }
     .nav-links a{ padding:13px 0; width:100%; border-top:1px solid var(--border-light); opacity:1; }
     .nav-links a:first-child{ border-top:none; }
-    .nav-social{ display:none; }
+    .nav-whatsapp{ display:none; }
     .nav-links .nav-cta-mobile{ display:inline-flex; margin:12px 0; width:fit-content; }
     .nav-toggle{ display:block; }
     .service-grid{ grid-template-columns:1fr; }
@@ -411,11 +412,9 @@
       </ul>
     </div>
 
-    <div class="nav-social">
-      <a href="#" aria-label="LinkedIn">in</a>
-      <a href="#" aria-label="Instagram">ig</a>
-      <a href="#" aria-label="X / Twitter">X</a>
-    </div>
+    <a class="nav-whatsapp" href="https://wa.me/905386319930?text=Merhaba%2C%20Pixel%20Ajans%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp'tan yazın">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.14c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.14.11-1.83-.11-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.19-4.98-4.39-.15-.2-1.19-1.58-1.19-3.02 0-1.44.75-2.14 1.02-2.44.27-.29.58-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2.01.9 2.15.07.15.12.32.02.51-.1.2-.15.32-.29.5-.15.18-.31.4-.44.54-.15.15-.3.31-.13.6.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.29 2.34 1.44.29.15.46.13.63-.08.17-.2.72-.84.91-1.13.19-.29.38-.24.63-.15.25.09 1.62.76 1.9.9.28.14.46.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navLinks">☰</button>
   </div>
 </div>
