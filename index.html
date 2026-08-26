@@ -112,6 +112,13 @@
     transition:transform .15s ease, box-shadow .15s ease;
   }
   .nav-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 24px -8px var(--accent-soft); }
+  .nav-social{ display:flex; align-items:center; gap:10px; }
+  .nav-social a{
+    width:38px; height:38px; border:1px solid var(--border-light); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; color:var(--ink-light); font-size:13px;
+    background:rgba(247,243,236,0.97); transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .nav-social a:hover{ border-color:var(--accent-3); color:var(--accent-3); transform:translateY(-1px); }
 
   .nav-toggle{
     display:none; background:none; border:1px solid var(--border-light); border-radius:8px;
@@ -364,7 +371,7 @@
     .nav-links.open{ display:flex; }
     .nav-links a{ padding:13px 0; width:100%; border-top:1px solid var(--border-light); opacity:1; }
     .nav-links a:first-child{ border-top:none; }
-    .nav-cta{ display:none; }
+    .nav-social{ display:none; }
     .nav-links .nav-cta-mobile{ display:inline-flex; margin:12px 0; width:fit-content; }
     .nav-toggle{ display:block; }
     .service-grid{ grid-template-columns:1fr; }
@@ -400,11 +407,15 @@
         <li><a href="#referanslar">Referanslar</a></li>
         <li><a href="#sss">SSS</a></li>
         <li><a href="#iletisim">İletişim</a></li>
-        <li><a class="btn-primary nav-cta-mobile" href="#iletisim">Ücretsiz Ön Görüşme</a></li>
+        <li><a class="btn-primary nav-cta-mobile" href="#iletisim" id="navCtaBtn">Ücretsiz Ön Görüşme</a></li>
       </ul>
     </div>
 
-    <a class="nav-cta" href="#iletisim">Ücretsiz Ön Görüşme</a>
+    <div class="nav-social">
+      <a href="#" aria-label="LinkedIn">in</a>
+      <a href="#" aria-label="Instagram">ig</a>
+      <a href="#" aria-label="X / Twitter">X</a>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navLinks">☰</button>
   </div>
 </div>
@@ -676,6 +687,10 @@
         <input id="qm-name" type="text" required autocomplete="name">
       </div>
       <div class="field">
+        <label for="qm-phone">Telefon Numarası</label>
+        <input id="qm-phone" type="tel" required autocomplete="tel">
+      </div>
+      <div class="field">
         <label for="qm-msg">Mesajınız</label>
         <textarea id="qm-msg" placeholder="Kısaca ne konuda görüşmek istersiniz?" required></textarea>
       </div>
@@ -805,8 +820,9 @@
     submitBtn.disabled = true;
   });
 
-  // Hızlı ön görüşme kutusu (hero CTA)
+  // Hızlı ön görüşme kutusu (hero CTA + nav CTA)
   var heroCta = document.getElementById('heroCtaBtn');
+  var navCta = document.getElementById('navCtaBtn');
   var qmOverlay = document.getElementById('qmOverlay');
   var qmClose = document.getElementById('qmClose');
   var qmForm = document.getElementById('qmForm');
@@ -821,6 +837,7 @@
     qmOverlay.classList.remove('open');
   }
   heroCta.addEventListener('click', qmOpen);
+  navCta.addEventListener('click', qmOpen);
   qmClose.addEventListener('click', qmCloseFn);
   qmOverlay.addEventListener('click', function(e){
     if (e.target === qmOverlay) qmCloseFn();
