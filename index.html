@@ -189,6 +189,21 @@
   .light .section-head .sub{ color:var(--muted-light); }
 
   /* ---------- Referanslar ---------- */
+  .brand-logos{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px; margin-bottom:28px;
+  }
+  .brand-logo-card{
+    aspect-ratio:16/10; border-radius:14px; border:1px solid var(--border-dark);
+    background:rgba(247,243,236,0.97);
+    display:flex; align-items:center; justify-content:center; padding:20px 24px;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .brand-logo-card:hover{
+    transform:translateY(-4px); border-color:var(--accent);
+    box-shadow:0 12px 28px rgba(0,0,0,0.28);
+  }
+  .brand-logo-card img{ max-width:100%; max-height:100%; object-fit:contain; display:block; }
   .ref-grid{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
   .ref-badge{
     font-family:var(--display); font-weight:600; font-size:14.5px; color:var(--muted);
@@ -486,17 +501,20 @@
         <span class="eyebrow"><span class="dot"></span>REFERANSLAR</span>
         <h2>Birlikte çalıştığımız markalar.</h2>
       </div>
+      <div class="brand-logos">
+        <div class="brand-logo-card"><img src="assets/brands/btcturk.jpg" alt="BtcTurk logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/ciftci-towers.jpg" alt="Çiftçi Towers logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/easycep.png" alt="Easycep logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/gul-al.png" alt="Gül-Al Otomotiv logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/mplus.png" alt="Mplus logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/papel.png" alt="Papel logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/tudors.jpg" alt="Tudors logosu" loading="lazy"></div>
+        <div class="brand-logo-card"><img src="assets/brands/wiggo.jpg" alt="Wiggo logosu" loading="lazy"></div>
+      </div>
       <div class="ref-grid">
-        <span class="ref-badge">Wiggo</span>
-        <span class="ref-badge">Çiftçi Towers</span>
-        <span class="ref-badge">Papel</span>
         <span class="ref-badge">Tor Holding</span>
-        <span class="ref-badge">Easycep</span>
         <span class="ref-badge">GoTradeGo</span>
         <span class="ref-badge">Keller Williams</span>
-        <span class="ref-badge">BtcTurk</span>
-        <span class="ref-badge">Kia — Gül-Al</span>
-        <span class="ref-badge">Mplus</span>
         <span class="ref-badge">İstanbul Now</span>
         <span class="ref-badge">Trem Global</span>
         <span class="ref-badge">Cipo &amp; Baxx</span>
