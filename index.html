@@ -144,7 +144,15 @@
     mask-image:linear-gradient(to bottom, black, transparent 85%);
   }
   .hero .wrap{ position:relative; z-index:1; }
-  .hero-copy{ max-width:760px; margin:0 auto; text-align:center; padding-top:26px; }
+
+  /* ---------- Hero slider ---------- */
+  .hero-slider-track{ position:relative; max-width:760px; margin:0 auto; padding-top:26px; min-height:340px; }
+  .hero-slide{
+    position:absolute; inset:0; top:26px; text-align:center;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .6s ease;
+  }
+  .hero-slide.is-active{ position:relative; opacity:1; visibility:visible; pointer-events:auto; }
   .hero h1{
     font-size:clamp(34px, 5.4vw, 62px);
     line-height:1.06;
@@ -156,6 +164,26 @@
     color:var(--muted); font-size:16.5px; line-height:1.7;
   }
   .hero .cta-row{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; justify-content:center; }
+
+  .hero-slider-progress{
+    width:220px; height:3px; margin:36px auto 0; border-radius:2px;
+    background:var(--border-dark); overflow:hidden;
+  }
+  .hero-slider-progress-bar{ height:100%; width:0%; background:var(--accent); }
+  .hero-slider-nav{ display:flex; align-items:center; justify-content:center; gap:18px; margin-top:16px; }
+  .hero-slider-nav-btn{
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--border-dark);
+    background:transparent; color:var(--ink); font-size:18px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .hero-slider-nav-btn:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-1px); }
+  .hero-slider-dots{ display:flex; align-items:center; gap:9px; }
+  .hero-slider-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--border-dark); padding:0;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .hero-slider-dot.is-active{ background:var(--accent); transform:scale(1.35); }
 
   .btn-primary{
     font-family:var(--mono); font-size:13.5px; font-weight:500;
@@ -422,23 +450,50 @@
 <main id="icerik">
 
   <!-- HERO -->
-  <section class="hero" style="border-top:none;" id="anasayfa">
+  <section class="hero" style="border-top:none;" id="anasayfa" data-auto-interval="7000">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-dots" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="dot"></span>PERFORMANS PAZARLAMA AJANSI</span>
-        <h1>Reklam bütçenizi <em>ölçülebilir büyümeye</em> çeviriyoruz.</h1>
-        <p class="sub">Google, Meta, TikTok, LinkedIn ve programatik kanallarda veriye dayalı reklam stratejileriyle markanızın büyümesini hızlandırıyoruz.</p>
-        <div class="cta-row">
-          <a href="#iletisim" class="btn-primary" id="heroCtaBtn">Ücretsiz Ön Görüşme →</a>
-          <a href="#hizmetler" class="btn-secondary">Hizmetleri İncele</a>
+      <div class="hero-slider-track">
+        <div class="hero-slide is-active" data-slide="0">
+          <span class="eyebrow"><span class="dot"></span>PERFORMANS PAZARLAMA AJANSI</span>
+          <h1>Reklam bütçenizi <em>ölçülebilir büyümeye</em> çeviriyoruz.</h1>
+          <p class="sub">Google, Meta, TikTok, LinkedIn ve programatik kanallarda veriye dayalı reklam stratejileriyle markanızın büyümesini hızlandırıyoruz.</p>
+          <div class="cta-row">
+            <a href="#iletisim" class="btn-primary hero-cta-btn">Ücretsiz Ön Görüşme →</a>
+            <a href="#hizmetler" class="btn-secondary">Hizmetleri İncele</a>
+          </div>
+        </div>
+        <div class="hero-slide" data-slide="1">
+          <span class="eyebrow"><span class="dot"></span>SONUÇ ODAKLI</span>
+          <h1>Görünürlük değil, <em>sonuç odaklı</em> reklamcılık.</h1>
+          <p class="sub">Veriyi, algoritmayı ve bütçeyi yöneten performans odaklı bir ekiple çalışın — post tasarlayan bir ajansla değil.</p>
+          <div class="cta-row">
+            <a href="#hizmetler" class="btn-primary">Hizmetleri İncele →</a>
+            <a href="#referanslar" class="btn-secondary">Referanslara Bakın</a>
+          </div>
+        </div>
+        <div class="hero-slide" data-slide="2">
+          <span class="eyebrow"><span class="dot"></span>BİRLİKTE ÇALIŞALIM</span>
+          <h1>Birlikte çalışalım, <em>doğru stratejiyi</em> bulalım.</h1>
+          <p class="sub">Markanızın reklam potansiyelini birlikte keşfedelim, size özel bir yol haritası çıkaralım.</p>
+          <div class="cta-row">
+            <a href="#iletisim" class="btn-primary hero-cta-btn">İletişime Geçin →</a>
+            <a href="#hizmetler" class="btn-secondary">Hizmetleri İncele</a>
+          </div>
         </div>
       </div>
 
       <div class="hero-signal">
         <div class="pixel-grid" id="pixelGrid" aria-hidden="true"></div>
       </div>
+
+      <div class="hero-slider-progress"><div class="hero-slider-progress-bar" id="heroProgressBar"></div></div>
+      <nav class="hero-slider-nav" aria-label="Slayt navigasyonu">
+        <button type="button" class="hero-slider-nav-btn" data-dir="prev" aria-label="Önceki">‹</button>
+        <div class="hero-slider-dots" id="heroSliderDots"></div>
+        <button type="button" class="hero-slider-nav-btn" data-dir="next" aria-label="Sonraki">›</button>
+      </nav>
     </div>
   </section>
 
@@ -846,8 +901,8 @@
     submitBtn.disabled = true;
   });
 
-  // Hızlı ön görüşme kutusu (hero CTA + nav CTA)
-  var heroCta = document.getElementById('heroCtaBtn');
+  // Hızlı ön görüşme kutusu (hero slider CTA'ları + nav CTA)
+  var heroCtaBtns = document.querySelectorAll('.hero-cta-btn');
   var navCta = document.getElementById('navCtaBtn');
   var qmOverlay = document.getElementById('qmOverlay');
   var qmClose = document.getElementById('qmClose');
@@ -862,7 +917,7 @@
   function qmCloseFn(){
     qmOverlay.classList.remove('open');
   }
-  heroCta.addEventListener('click', qmOpen);
+  heroCtaBtns.forEach(function(btn){ btn.addEventListener('click', qmOpen); });
   navCta.addEventListener('click', qmOpen);
   qmClose.addEventListener('click', qmCloseFn);
   qmOverlay.addEventListener('click', function(e){
@@ -884,6 +939,60 @@
       qmSubmit.disabled = false;
     }, 1800);
   });
+
+  // Hero slider (mayancur.com referanslı, kendi marka dilimizle)
+  var heroSection = document.getElementById('anasayfa');
+  var heroTrack = heroSection.querySelector('.hero-slider-track');
+  var heroSlides = Array.prototype.slice.call(heroTrack.querySelectorAll('.hero-slide'));
+  var heroDotsWrap = document.getElementById('heroSliderDots');
+  var heroProgressBar = document.getElementById('heroProgressBar');
+  var heroPrevBtn = heroSection.querySelector('.hero-slider-nav-btn[data-dir="prev"]');
+  var heroNextBtn = heroSection.querySelector('.hero-slider-nav-btn[data-dir="next"]');
+  var heroInterval = parseInt(heroSection.getAttribute('data-auto-interval'), 10) || 7000;
+  var heroCurrent = 0;
+  var heroTimer = null;
+
+  heroSlides.forEach(function(slide, i){
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'hero-slider-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'Slayt ' + (i + 1));
+    dot.addEventListener('click', function(){ heroGoTo(i); heroResetTimer(); });
+    heroDotsWrap.appendChild(dot);
+  });
+  var heroDots = Array.prototype.slice.call(heroDotsWrap.children);
+
+  function heroGoTo(i){
+    heroSlides[heroCurrent].classList.remove('is-active');
+    heroDots[heroCurrent].classList.remove('is-active');
+    heroCurrent = (i + heroSlides.length) % heroSlides.length;
+    heroSlides[heroCurrent].classList.add('is-active');
+    heroDots[heroCurrent].classList.add('is-active');
+    heroRestartProgress();
+  }
+  function heroRestartProgress(){
+    heroProgressBar.style.transition = 'none';
+    heroProgressBar.style.width = '0%';
+    void heroProgressBar.offsetWidth;
+    heroProgressBar.style.transition = 'width ' + heroInterval + 'ms linear';
+    heroProgressBar.style.width = '100%';
+  }
+  function heroResetTimer(){
+    clearInterval(heroTimer);
+    if (reduceMotion) return;
+    heroTimer = setInterval(function(){ heroGoTo(heroCurrent + 1); }, heroInterval);
+  }
+  heroPrevBtn.addEventListener('click', function(){ heroGoTo(heroCurrent - 1); heroResetTimer(); });
+  heroNextBtn.addEventListener('click', function(){ heroGoTo(heroCurrent + 1); heroResetTimer(); });
+  heroSection.addEventListener('mouseenter', function(){ clearInterval(heroTimer); });
+  heroSection.addEventListener('mouseleave', function(){ heroResetTimer(); });
+
+  if (reduceMotion){
+    heroProgressBar.style.display = 'none';
+  } else {
+    heroRestartProgress();
+  }
+  heroResetTimer();
 })();
 </script>
 
