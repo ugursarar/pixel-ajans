@@ -111,9 +111,18 @@
           <a href="#hizmetler" class="btn btn-secondary">Hizmetleri İncele</a>
         </div>
         <div class="hero-stats">
-          <div><strong>2026</strong><span>Kuruluş Yılı</span></div>
-          <div><strong>4+</strong><span>Reklam Kanalı</span></div>
-          <div><strong>%100</strong><span>Şeffaf Raporlama</span></div>
+          <div class="stat-glass">
+            <strong class="stat-counter" style="background-image:linear-gradient(90deg,#F6C23E,#FBBF24,#EAB308)" data-end="200" data-prefix="" data-suffix="+" data-duration="1400">0+</strong>
+            <span>Marka</span>
+          </div>
+          <div class="stat-glass">
+            <strong class="stat-counter" style="background-image:linear-gradient(90deg,#4F46E5,#8B5CF6,#A855F7)" data-end="50" data-prefix="₺" data-suffix="M+" data-duration="1600">₺0M+</strong>
+            <span>Yönetilen Bütçe</span>
+          </div>
+          <div class="stat-glass">
+            <strong class="stat-counter" style="background-image:linear-gradient(90deg,#F97316,#F59E0B,#F6C23E)" data-end="14" data-prefix="" data-suffix="x" data-duration="1800">0x</strong>
+            <span>ROAS</span>
+          </div>
         </div>
       </div>
       <div class="hero-visual">
@@ -529,6 +538,46 @@
       qmSubmit.textContent = 'Gönder'; qmSubmit.removeAttribute('data-sent'); qmSubmit.disabled = false;
     }, 1800);
   });
+
+  // Hero istatistik sayaçları — scroll'a girince 0'dan hedef değere say
+  var heroStats = document.querySelector('.hero-stats');
+  if (heroStats) {
+    var counters = heroStats.querySelectorAll('.stat-counter');
+    if (counters.length) {
+      var formatCounter = function(el, value){
+        var prefix = el.getAttribute('data-prefix') || '';
+        var suffix = el.getAttribute('data-suffix') || '';
+        el.textContent = prefix + Math.round(value) + suffix;
+      };
+      var runCounters = function(){
+        counters.forEach(function(el){
+          if (el.dataset.counted === '1') return;
+          el.dataset.counted = '1';
+          var end = parseFloat(el.getAttribute('data-end')) || 0;
+          var duration = parseInt(el.getAttribute('data-duration'), 10) || 1600;
+          var startTime = null;
+          function tick(ts){
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            formatCounter(el, end * eased);
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      };
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        counters.forEach(function(el){ formatCounter(el, parseFloat(el.getAttribute('data-end'))); });
+      } else {
+        var statObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) { runCounters(); statObserver.disconnect(); }
+          });
+        }, { threshold: 0.35 });
+        statObserver.observe(heroStats);
+      }
+    }
+  }
 })();
 </script>
 </body>
