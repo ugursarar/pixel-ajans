@@ -193,7 +193,7 @@ p{ margin:0; }
 
 /* ---------- Bento istatistik (Neden Biz) ---------- */
 .bento-top{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:16px; margin-top:44px; }
-.dna-card{ background:rgba(255,255,255,.04); border:1px solid var(--border-dark); border-radius:var(--radius-lg); padding:28px; }
+.dna-card{ grid-row:span 2; background:rgba(255,255,255,.04); border:1px solid var(--border-dark); border-radius:var(--radius-lg); padding:28px; }
 .dna-card .tag{ font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--brand); text-transform:uppercase; margin-bottom:10px; display:block; }
 .dna-card h3{ color:#fff; font-size:20px; margin-bottom:10px; }
 .dna-card p{ color:rgba(255,255,255,.55); font-size:14px; line-height:1.65; margin-bottom:22px; }
@@ -215,13 +215,38 @@ p{ margin:0; }
 @media (max-width:900px){ .bento-top{ grid-template-columns:1fr 1fr; } }
 @media (max-width:640px){ .bento-top{ grid-template-columns:1fr; } }
 
-.bento-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:16px; }
-.bento-card{ background:rgba(255,255,255,.04); border:1px solid var(--border-dark); border-radius:var(--radius-lg); padding:26px; }
+.bento-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:16px; margin-top:16px; }
+.bento-card{ grid-column:span 1; background:rgba(255,255,255,.04); border:1px solid var(--border-dark); border-radius:var(--radius-lg); padding:26px; }
+.bento-card--wide{ grid-column:span 2; }
 .bento-card .tag{ font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--brand); text-transform:uppercase; margin-bottom:10px; display:block; }
 .bento-card h3{ color:#fff; font-size:17px; margin-bottom:8px; }
 .bento-card p{ color:rgba(255,255,255,.55); font-size:13.5px; line-height:1.6; }
-@media (max-width:900px){ .bento-grid{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:560px){ .bento-grid{ grid-template-columns:1fr; } }
+
+.bento-card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:20px; }
+.bento-card-icon{ width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.bento-card-icon svg{ width:22px; height:22px; }
+.bento-card-icon--blue{ background:rgba(14,165,233,.18); color:#7DD3FC; }
+.bento-card-icon--gold{ background:rgba(246,194,62,.18); color:var(--brand); }
+.bento-card-icon--violet{ background:rgba(139,92,246,.18); color:#C4B5FD; }
+.bento-card-icon--amber{ background:rgba(245,158,11,.18); color:#FCD34D; }
+
+.bento-card-badge{ font-size:10px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:5px 10px; border-radius:var(--radius-pill); border:1px solid; white-space:nowrap; }
+.bento-card-badge--blue{ color:#7DD3FC; background:rgba(14,165,233,.1); border-color:rgba(14,165,233,.25); }
+.bento-card-badge--gold{ color:var(--brand); background:rgba(246,194,62,.1); border-color:rgba(246,194,62,.3); }
+.bento-card-badge--violet{ color:#C4B5FD; background:rgba(139,92,246,.1); border-color:rgba(139,92,246,.25); }
+.bento-card-badge--amber{ color:#FCD34D; background:rgba(245,158,11,.1); border-color:rgba(245,158,11,.25); }
+
+.bento-card--blue{ border-color:rgba(14,165,233,.2); }
+.bento-card--gold{ border-color:rgba(246,194,62,.25); }
+.bento-card--violet{ border-color:rgba(139,92,246,.25); background:linear-gradient(135deg, rgba(139,92,246,.10), rgba(255,255,255,.03) 55%, rgba(246,194,62,.06)); }
+.bento-card--amber{ border-color:rgba(245,158,11,.2); }
+
+.bento-card-subtags{ display:flex; gap:18px; flex-wrap:wrap; margin-top:20px; padding-top:18px; border-top:1px solid var(--border-dark); font-size:11.5px; color:rgba(255,255,255,.5); }
+.bento-card-subtags span{ display:flex; align-items:center; gap:6px; }
+.bento-card-subtags i{ width:6px; height:6px; border-radius:50%; display:inline-block; }
+
+@media (max-width:900px){ .bento-grid{ grid-template-columns:repeat(2,1fr); } .bento-card--wide{ grid-column:span 2; } }
+@media (max-width:560px){ .bento-grid{ grid-template-columns:1fr; } .bento-card--wide{ grid-column:span 1; } }
 
 /* ---------- Süreç ---------- */
 .process-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:48px; }
