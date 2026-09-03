@@ -497,6 +497,62 @@
     </div>
   </section>
 
+  <!-- ÖLÇÜLEBİLİR SONUÇLAR -->
+  <section class="home-cases" id="basari-hikayeleri">
+    <div class="wrap">
+      <div class="home-cases__head">
+        <div class="home-cases__head-text">
+          <span class="eyebrow"><span class="dot"></span>BAŞARI HİKAYELERİ</span>
+          <h2 style="margin-top:14px;">Ölçülebilir Sonuçlar</h2>
+          <p class="sub">Gerçek projelerden gerçek performans artışları.</p>
+        </div>
+        <a href="#iletisim" class="home-cases__cta">Sizin hikayeniz <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="home-cases-grid">
+        <article class="home-case-card" style="--case-from:#0ea5e9; --case-to:#6366f1; --case-delay:80ms; --case-progress:82%;">
+          <div class="home-case-card-inner">
+            <div class="home-case-top">
+              <span class="home-case-badge">SEO Başarısı</span>
+              <span class="home-case-duration">7 ay</span>
+            </div>
+            <h3 class="home-case-title">Tudors</h3>
+            <div class="home-case-metric-row">
+              <span class="home-case-metric" data-end="180" data-prefix="+" data-suffix="%" data-duration="1600">+0%</span>
+              <span class="home-case-metric-label">Organik Trafik</span>
+            </div>
+            <div class="home-case-track"><div class="home-case-progress"></div></div>
+            <div class="home-case-compare">
+              <div class="home-case-compare__col"><p class="home-case-compare__label">Öncesi</p><p class="home-case-compare__before">20K</p></div>
+              <div class="home-case-compare__arrow"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span></div>
+              <div class="home-case-compare__col"><p class="home-case-compare__label">Sonrası</p><p class="home-case-compare__after">56K</p></div>
+            </div>
+            <p class="home-case-desc">Teknik SEO ve içerik stratejisiyle 7 ayda organik trafikte %180 artış sağlandı.</p>
+          </div>
+        </article>
+        <article class="home-case-card" style="--case-from:#F6C23E; --case-to:#F97316; --case-delay:200ms; --case-progress:92%;">
+          <div class="home-case-card-inner">
+            <div class="home-case-top">
+              <span class="home-case-badge">Google Ads Başarısı</span>
+              <span class="home-case-duration">6 ay</span>
+            </div>
+            <h3 class="home-case-title">Mplus</h3>
+            <div class="home-case-metric-row">
+              <span class="home-case-metric" data-end="14" data-prefix="" data-suffix="x" data-duration="1800">0x</span>
+              <span class="home-case-metric-label">ROAS</span>
+            </div>
+            <div class="home-case-track"><div class="home-case-progress"></div></div>
+            <div class="home-case-compare">
+              <div class="home-case-compare__col"><p class="home-case-compare__label">Öncesi</p><p class="home-case-compare__before">2x</p></div>
+              <div class="home-case-compare__arrow"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span></div>
+              <div class="home-case-compare__col"><p class="home-case-compare__label">Sonrası</p><p class="home-case-compare__after">14x</p></div>
+            </div>
+            <p class="home-case-desc">Google Ads ve SEO yönetimiyle ROAS 2x'ten 14x'e yükseldi.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- REFERANSLAR -->
   <section class="section section--surface" id="referanslar">
     <div class="wrap">
@@ -777,6 +833,49 @@
     } else {
       ssUpdate();
       ssStartAutoplay();
+    }
+  }
+
+  // Ölçülebilir Sonuçlar — kart reveal animasyonu + sayaçlar
+  var homeCases = document.querySelector('.home-cases');
+  if (homeCases) {
+    var caseMetrics = homeCases.querySelectorAll('.home-case-metric');
+    var formatCaseMetric = function(el, value){
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      el.textContent = prefix + Math.round(value) + suffix;
+    };
+    var runCaseCounters = function(){
+      caseMetrics.forEach(function(el){
+        if (el.dataset.counted === '1') return;
+        el.dataset.counted = '1';
+        var end = parseFloat(el.getAttribute('data-end')) || 0;
+        var duration = parseInt(el.getAttribute('data-duration'), 10) || 1600;
+        var startTime = null;
+        function tick(ts){
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          formatCaseMetric(el, end * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      homeCases.classList.add('is-active');
+      caseMetrics.forEach(function(el){ formatCaseMetric(el, parseFloat(el.getAttribute('data-end'))); });
+    } else {
+      var caseObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            homeCases.classList.add('is-active');
+            runCaseCounters();
+            caseObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+      caseObserver.observe(homeCases);
     }
   }
 })();
