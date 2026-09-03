@@ -382,6 +382,23 @@
       btn.parentElement.classList.toggle('is-open');
     });
   });
+
+  // Masaüstü: gecikmeli hover ile mega-panel aç/kapat — imleç butondan panele geçerken küçük boşlukta kaybolmasın
+  var navCloseTimers = new WeakMap();
+  document.querySelectorAll('.nav-group').forEach(function(group){
+    group.addEventListener('mouseenter', function(){
+      if (window.innerWidth <= 980) return;
+      var pending = navCloseTimers.get(group);
+      if (pending) { clearTimeout(pending); navCloseTimers.delete(group); }
+      document.querySelectorAll('.nav-group.is-open').forEach(function(g){ if (g !== group) g.classList.remove('is-open'); });
+      group.classList.add('is-open');
+    });
+    group.addEventListener('mouseleave', function(){
+      if (window.innerWidth <= 980) return;
+      var t = setTimeout(function(){ group.classList.remove('is-open'); }, 300);
+      navCloseTimers.set(group, t);
+    });
+  });
   var qmOverlay = document.getElementById('qmOverlay');
   var qmClose = document.getElementById('qmClose');
   var qmForm = document.getElementById('qmForm');
