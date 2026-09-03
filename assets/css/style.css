@@ -159,12 +159,10 @@ p{ margin:0; }
   .hero-visual{ margin-top:20px; }
 }
 
-/* ---------- Platform şeridi (marquee) ---------- */
+/* ---------- Platform şeridi ---------- */
 .marquee-wrap{ overflow:hidden; padding:36px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
 .marquee-wrap .label{ text-align:center; font-size:12.5px; font-weight:600; letter-spacing:.08em; color:var(--text-muted); text-transform:uppercase; margin-bottom:22px; }
-.marquee{ display:flex; gap:16px; width:max-content; animation:marquee 32s linear infinite; }
-.marquee span{ font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--text-soft); white-space:nowrap; }
-@keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+.platform-grid{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:12px 14px; max-width:1180px; margin:0 auto; padding:0 20px; }
 
 /* ---------- Platform rozetleri (renkli pill'ler) ---------- */
 .badge-pill{
@@ -179,9 +177,18 @@ p{ margin:0; }
 .badge-pill.c-hotjar{ --pc-1:#FDE3E1; --pc-2:#FFF3F2; --pc-dot:#E24C3C; border-color:#F9CFCB; color:#C0392B; }
 .badge-pill.c-meta{ --pc-1:#DDEBFF; --pc-2:#EFF6FF; --pc-dot:#3E8DEB; border-color:#CBE0FD; color:#1D5CB0; }
 .badge-pill.c-linkedin{ --pc-1:#E5E4FB; --pc-2:#F2F1FE; --pc-dot:#5B4FE0; border-color:#D6D4F8; color:#4438C9; }
-.badge-pill.c-ahrefs{ --pc-1:#FFEBD6; --pc-2:#FFF6EC; --pc-dot:#F0862E; border-color:#FBDCB9; color:#C4661A; }
-.marquee-track-wrap{ overflow:hidden; }
-.marquee-track-wrap + .marquee-track-wrap{ margin-top:14px; }
+.badge-pill.c-analytics{ --pc-1:#FFEBD6; --pc-2:#FFF6EC; --pc-dot:#F0862E; border-color:#FBDCB9; color:#C4661A; }
+.badge-pill.c-youtube{ --pc-1:#FDE1E1; --pc-2:#FFF2F2; --pc-dot:#E23636; border-color:#F9CACA; color:#C0272B; }
+.badge-pill.c-apple{ --pc-1:#EAEAEC; --pc-2:#F5F5F6; --pc-dot:#1D1D1F; border-color:#D8D8DA; color:#1D1D1F; }
+.badge-pill.c-yandex{ --pc-1:#FDE3E6; --pc-2:#FFF3F4; --pc-dot:#FF3333; border-color:#F9CDD1; color:#CC1F27; }
+.badge-pill.c-searchconsole{ --pc-1:#E3F6E9; --pc-2:#F2FCF5; --pc-dot:#34A853; border-color:#CBEBD5; color:#1E7A3C; }
+.badge-pill.c-tagmanager{ --pc-1:#E1EEFE; --pc-2:#F1F8FF; --pc-dot:#246FDB; border-color:#CCE1FB; color:#1B54A8; }
+.badge-pill.c-datastudio{ --pc-1:#EDE3FE; --pc-2:#F7F2FF; --pc-dot:#7C3AED; border-color:#DCCBFB; color:#5B21B6; }
+.badge-pill.c-tableau{ --pc-1:#FFE6DE; --pc-2:#FFF3EF; --pc-dot:#E8622C; border-color:#FBCFC0; color:#C14A18; }
+.badge-pill.c-adjust{ --pc-1:#D9FBF3; --pc-2:#F0FFFC; --pc-dot:#00B899; border-color:#BEF3E7; color:#03876F; }
+.badge-pill.c-firebase{ --pc-1:#FFEACC; --pc-2:#FFF6E8; --pc-dot:#F5A623; border-color:#FBDEA6; color:#B9740F; }
+.badge-pill.c-affiliate{ --pc-1:#FFF3D6; --pc-2:#FFFBEF; --pc-dot:#F6C23E; border-color:#FBE9B8; color:#8A6413; }
+.badge-pill.c-b2b{ --pc-1:#E7EAF0; --pc-2:#F3F5F8; --pc-dot:#334155; border-color:#D6DBE3; color:#1F2937; }
 
 /* ---------- Hizmet kartları ---------- */
 .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
