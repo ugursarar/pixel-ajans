@@ -448,4 +448,16 @@ p{ margin:0; }
 .sph-faq-q svg{ flex-shrink:0; transition:transform .3s; color:var(--brand-dark); }
 .sph-faq-item.is-open .sph-faq-q svg{ transform:rotate(45deg); }
 .sph-faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+
+/* ---- Sektör sayfası: Gerçeklik (pain points) ---- */
+.sph-reality{ padding:80px 0; background:var(--navy); color:#fff; }
+.sph-reality-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:900px; margin:44px auto 0; padding:0 20px; }
+.sph-reality-item{ display:flex; align-items:flex-start; gap:14px; padding:20px 22px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius-lg); }
+.sph-reality-item svg{ flex-shrink:0; margin-top:2px; color:var(--brand); }
+.sph-reality-item p{ font-size:14.5px; line-height:1.55; color:rgba(255,255,255,.82); margin:0; }
+@media (max-width:767px){ .sph-reality-grid{ grid-template-columns:1fr; } }
+
+/* ---- Sektör sayfası: Kullandığımız Araçlar (badge-pill row reuse) ---- */
+.sph-tools{ padding:70px 0; background:var(--cream); }
+.sph-tools .platform-grid{ margin-top:36px; }
 .sph-faq-a p{ padding:0 22px 20px; color:var(--text-muted); font-size:14.5px; line-height:1.65; }
