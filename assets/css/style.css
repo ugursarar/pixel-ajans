@@ -568,3 +568,27 @@ p{ margin:0; }
 .svc-card__desc{ position:relative; font-size:13.5px; line-height:1.55; color:var(--text-muted); margin-bottom:14px; }
 .svc-card__link{ position:relative; font-size:13px; font-weight:700; color:var(--card-from); display:inline-flex; align-items:center; gap:4px; transition:gap .25s; }
 .svc-card:hover .svc-card__link{ gap:7px; }
+
+/* ---- Ana sayfa: Platform Ortakları (dikey otomatik kayan 3 sütun) ---- */
+.platform-marquee{ padding:80px 0; background:var(--cream); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.platform-marquee__head{ text-align:center; max-width:580px; margin:0 auto 40px; padding:0 20px; }
+.platform-marquee__head h2{ font-family:var(--font-display); font-size:clamp(1.35rem,3vw,1.8rem); font-weight:800; color:var(--navy); margin-top:12px; }
+.platform-marquee__cols{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:900px; margin:0 auto; padding:0 20px;
+  height:400px; position:relative; overflow:hidden;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+.platform-col{ overflow:hidden; position:relative; }
+.platform-col__track{ display:flex; flex-direction:column; gap:14px; width:100%; }
+.platform-col--up .platform-col__track{ animation:platform-scroll-up linear infinite; animation-duration:24s; }
+.platform-col--down .platform-col__track{ animation:platform-scroll-down linear infinite; animation-duration:28s; }
+@keyframes platform-scroll-up{ from{ transform:translateY(0); } to{ transform:translateY(-50%); } }
+@keyframes platform-scroll-down{ from{ transform:translateY(-50%); } to{ transform:translateY(0); } }
+.platform-marquee__cols:hover .platform-col__track{ animation-play-state:paused; }
+.platform-col .badge-pill{ width:100%; box-sizing:border-box; font-size:14px; padding:12px 16px; }
+@media (prefers-reduced-motion: reduce){ .platform-col__track{ animation:none !important; } }
+@media (max-width:700px){
+  .platform-marquee__cols{ grid-template-columns:repeat(2,1fr); height:320px; }
+  .platform-col:nth-child(3){ display:none; }
+}
