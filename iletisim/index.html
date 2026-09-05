@@ -398,6 +398,12 @@
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && qmOverlay.classList.contains('open')) qmCloseFn(); });
   qmForm.addEventListener('submit', function(e){
     e.preventDefault();
+    var qmNameVal = document.getElementById('qm-name').value;
+    var qmPhoneVal = document.getElementById('qm-phone').value;
+    var qmMsgVal = document.getElementById('qm-msg').value;
+    var qmSubject = 'Ücretsiz Ön Görüşme Talebi - ' + qmNameVal;
+    var qmBody = 'İsim: ' + qmNameVal + '\nTelefon: ' + qmPhoneVal + '\nMesaj: ' + qmMsgVal;
+    window.location.href = 'mailto:ugursarar@gmail.com?subject=' + encodeURIComponent(qmSubject) + '&body=' + encodeURIComponent(qmBody);
     qmSubmit.textContent = 'Talebiniz Alındı ✓';
     qmSubmit.setAttribute('data-sent', 'true');
     qmSubmit.disabled = true;
@@ -430,6 +436,28 @@
   if (cpForm) {
     cpForm.addEventListener('submit', function(e){
       e.preventDefault();
+      var cpVals = {
+        name: document.getElementById('cp-name').value,
+        company: document.getElementById('cp-company').value,
+        phone: document.getElementById('cp-phone').value,
+        email: document.getElementById('cp-email').value,
+        web: document.getElementById('cp-web').value,
+        sector: document.getElementById('cp-sector').value,
+        budget: document.getElementById('cp-budget').value,
+        service: document.getElementById('cp-service').value,
+        msg: document.getElementById('cp-msg').value
+      };
+      var cpSubject = 'Proje Başlangıcı Talebi - ' + cpVals.name;
+      var cpBody = 'İsim: ' + cpVals.name + '\n' +
+        'Şirket: ' + cpVals.company + '\n' +
+        'Telefon: ' + cpVals.phone + '\n' +
+        'E-Posta: ' + cpVals.email + '\n' +
+        'Web Sitesi: ' + cpVals.web + '\n' +
+        'Sektör: ' + cpVals.sector + '\n' +
+        'Aylık Bütçe: ' + cpVals.budget + '\n' +
+        'İlgilenilen Hizmet: ' + cpVals.service + '\n' +
+        'Mesaj: ' + cpVals.msg;
+      window.location.href = 'mailto:ugursarar@gmail.com?subject=' + encodeURIComponent(cpSubject) + '&body=' + encodeURIComponent(cpBody);
       cpSubmit.textContent = 'Talebiniz Alındı ✓';
       cpSubmit.setAttribute('data-sent', 'true');
       cpSubmit.disabled = true;

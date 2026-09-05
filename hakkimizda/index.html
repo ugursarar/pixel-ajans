@@ -267,6 +267,12 @@
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && qmOverlay.classList.contains('open')) qmCloseFn(); });
   qmForm.addEventListener('submit', function(e){
     e.preventDefault();
+    var qmNameVal = document.getElementById('qm-name').value;
+    var qmPhoneVal = document.getElementById('qm-phone').value;
+    var qmMsgVal = document.getElementById('qm-msg').value;
+    var qmSubject = 'Ücretsiz Ön Görüşme Talebi - ' + qmNameVal;
+    var qmBody = 'İsim: ' + qmNameVal + '\nTelefon: ' + qmPhoneVal + '\nMesaj: ' + qmMsgVal;
+    window.location.href = 'mailto:ugursarar@gmail.com?subject=' + encodeURIComponent(qmSubject) + '&body=' + encodeURIComponent(qmBody);
     qmSubmit.textContent = 'Talebiniz Alındı ✓';
     qmSubmit.setAttribute('data-sent', 'true');
     qmSubmit.disabled = true;
