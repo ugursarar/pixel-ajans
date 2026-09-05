@@ -702,3 +702,36 @@ p{ margin:0; }
 /* ---- Markalarımız sayfası: 5 sütunlu istatistik şeridi ---- */
 .ref-stats-grid{ grid-template-columns:repeat(5,1fr) !important; }
 @media (max-width:700px){ .ref-stats-grid{ grid-template-columns:repeat(2,1fr) !important; } }
+
+/* ---- Markalarımız sayfası: koyu, tam ekran, yüzen ışıklı hero ---- */
+.ref-hero-dark{ position:relative; min-height:92vh; display:flex; align-items:center; padding:130px 0 60px; color:#fff; overflow:hidden; background:
+    radial-gradient(ellipse 70% 55% at 15% 25%, rgba(246,194,62,.12), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 88% 65%, rgba(59,130,246,.1), transparent 48%),
+    linear-gradient(165deg,#04070f 0%, var(--navy) 40%, #0d1528 100%);
+}
+.ref-hero-dark__orb{ position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:0; animation:ref-orb-float 9s ease-in-out infinite; }
+.ref-hero-dark__orb--1{ width:380px; height:380px; top:-8%; right:5%; background:rgba(246,194,62,.28); }
+.ref-hero-dark__orb--2{ width:300px; height:300px; bottom:5%; left:-5%; background:rgba(99,102,241,.22); animation-duration:11s; animation-delay:.6s; }
+.ref-hero-dark__orb--3{ width:180px; height:180px; top:42%; left:38%; background:rgba(246,194,62,.16); animation-duration:7s; animation-delay:.3s; }
+@keyframes ref-orb-float{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-16px,18px); } }
+.ref-hero-dark .wrap{ position:relative; z-index:1; }
+.ref-hero-dark .eyebrow{ background:rgba(246,194,62,.14); border-color:rgba(246,194,62,.35); color:var(--brand); }
+.ref-hero-dark h1{ color:#fff; text-shadow:0 2px 24px rgba(0,0,0,.35); }
+.ref-hero-dark h1 em{ font-style:normal; color:var(--brand); }
+.ref-hero-dark .sub{ color:rgba(255,255,255,.85); }
+.ref-hero-dark .btn-secondary{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.25); color:#fff; }
+@media (prefers-reduced-motion:reduce){ .ref-hero-dark__orb{ animation:none; } }
+
+/* ---- Markalarımız sayfası: atmosferik sektör kartları (fotoğraf yerine gradyan+ikon) ---- */
+.ref-sectors-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:960px; margin:44px auto 0; padding:0 20px; }
+@media (max-width:800px){ .ref-sectors-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .ref-sectors-grid{ grid-template-columns:1fr; } }
+.ref-sector{ position:relative; display:block; min-height:220px; border-radius:20px; overflow:hidden; text-decoration:none; color:#fff; background:linear-gradient(135deg,var(--rs-from),var(--rs-to)); transition:transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s; }
+.ref-sector:hover{ transform:translateY(-8px) scale(1.01); box-shadow:0 32px 64px rgba(15,23,42,.22); }
+.ref-sector__icon{ position:absolute; right:-18px; bottom:-18px; width:150px; height:150px; opacity:.22; transition:transform .6s; }
+.ref-sector:hover .ref-sector__icon{ transform:scale(1.08) rotate(4deg); }
+.ref-sector__icon svg{ width:100%; height:100%; }
+.ref-sector__overlay{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(4,7,15,.75) 0%, rgba(4,7,15,.2) 55%, transparent 100%); }
+.ref-sector__text{ position:absolute; left:0; right:0; bottom:0; padding:20px; z-index:1; }
+.ref-sector__tag{ display:block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--brand); margin-bottom:5px; }
+.ref-sector__name{ font-size:19px; font-weight:800; letter-spacing:-.01em; color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.4); }
