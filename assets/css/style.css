@@ -807,3 +807,17 @@ p{ margin:0; }
 .tech-orbit__node:hover .tech-orbit__tip{ opacity:1; }
 @media (max-width:700px){ .tech-orbit__field{ display:none; } }
 @media (prefers-reduced-motion:reduce){ .tech-orbit__ring, .tech-orbit__node{ animation:none; } }
+
+/* ---- Markalarımız sayfası: çok satırlı marka duvarı (3 satır, zıt yönlerde kayan) ---- */
+.wall-marquee-zone{ padding:36px 0; background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.wall-marquee-rows{ display:flex; flex-direction:column; gap:26px; }
+.wall-marquee{ overflow:hidden; width:100%; }
+.wall-marquee__track{ display:flex; gap:56px; width:max-content; align-items:center; }
+.wall-marquee--left .wall-marquee__track{ animation:wall-marquee-l var(--wm-speed,40s) linear infinite; }
+.wall-marquee--right .wall-marquee__track{ animation:wall-marquee-r var(--wm-speed,44s) linear infinite; }
+.wall-marquee:hover .wall-marquee__track{ animation-play-state:paused; }
+.wall-marquee__logo{ font-family:var(--font-display); font-size:19px; font-weight:800; color:var(--navy); opacity:.5; white-space:nowrap; transition:opacity .3s, transform .3s; }
+.wall-marquee__logo:hover{ opacity:1; transform:translateY(-3px); }
+@keyframes wall-marquee-l{ 100%{ transform:translateX(-50%); } }
+@keyframes wall-marquee-r{ 0%{ transform:translateX(-50%); } 100%{ transform:translateX(0); } }
+@media (prefers-reduced-motion:reduce){ .wall-marquee__track{ animation:none !important; } }
