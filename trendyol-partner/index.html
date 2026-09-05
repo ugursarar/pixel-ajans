@@ -412,7 +412,7 @@
     });
     group.addEventListener('mouseleave', function(){
       if (window.innerWidth <= 980) return;
-      var t = setTimeout(function(){ group.classList.remove('is-open'); }, 300);
+      var t = setTimeout(function(){ group.classList.remove('is-open'); }, 80);
       navCloseTimers.set(group, t);
     });
   });
