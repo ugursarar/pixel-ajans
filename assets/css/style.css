@@ -654,3 +654,51 @@ p{ margin:0; }
 
 /* ---- Sektör sayfası: Bize Güvenen Markalar (logo şeridi, ss-wall'a ek) ---- */
 .ss-wall .ss-logo-wall{ margin-top:52px; }
+
+/* ---- Markalarımız sayfası: hero performans dashboard mockup ---- */
+.ref-hero{ display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center; }
+@media (max-width:900px){ .ref-hero{ grid-template-columns:1fr; } }
+.ref-dash{ width:100%; border-radius:22px; padding:20px 22px; background:linear-gradient(165deg,#0f172a,#1e293b 60%,#111827); border:1px solid rgba(255,255,255,.08); box-shadow:0 30px 60px -20px rgba(15,23,42,.35); }
+.ref-dash__top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.08); }
+.ref-dash__app{ font-weight:800; font-size:12px; letter-spacing:.04em; color:#fff; }
+.ref-dash__live{ display:flex; align-items:center; gap:6px; font-size:10.5px; font-weight:700; color:#4ade80; text-transform:uppercase; letter-spacing:.05em; }
+.ref-dash__live .dot{ width:6px; height:6px; border-radius:50%; background:#4ade80; animation:sph-pulse 1.5s ease infinite; }
+.ref-dash__kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
+.ref-dash__kpis--3{ grid-template-columns:repeat(3,1fr); }
+.ref-dash__kpi{ padding:10px 8px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); }
+.ref-dash__kpi small{ display:block; font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:rgba(255,255,255,.45); margin-bottom:5px; }
+.ref-dash__kpi strong{ display:block; font-size:16px; font-weight:800; color:#fff; }
+.ref-dash__kpi em{ display:block; margin-top:3px; font-style:normal; font-size:10.5px; font-weight:700; color:var(--brand); }
+.ref-dash__chart{ display:flex; align-items:flex-end; gap:6px; height:90px; padding:10px; border-radius:12px; background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.06); }
+.ref-dash__chart span{ flex:1; height:0; border-radius:4px 4px 0 0; background:linear-gradient(180deg,var(--brand),rgba(246,194,62,.3)); }
+.ref-hero.is-active .ref-dash__chart span{ height:var(--h,50%); transition:height 1s ease var(--bd,0s); }
+.ref-slide .ref-dash__chart span{ height:var(--h,50%); }
+@media (max-width:600px){ .ref-dash__kpis{ grid-template-columns:repeat(2,1fr); } }
+
+/* ---- Markalarımız sayfası: büyük başarı vitrini (tek slaytlı, dashboard + marka kartı) ---- */
+.ref-showcase{ padding:90px 0; background:var(--cream); }
+.ref-showcase__stage{ position:relative; max-width:980px; margin:44px auto 0; padding:0 60px; }
+.ref-showcase__nav{ position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:#fff; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--navy); box-shadow:var(--shadow-md); z-index:2; }
+.ref-showcase__nav--prev{ left:0; }
+.ref-showcase__nav--next{ right:0; }
+.ref-showcase__nav:hover{ background:var(--cream); }
+.ref-slide{ display:none; grid-template-columns:1fr 1fr; gap:0; border-radius:26px; overflow:hidden; box-shadow:0 24px 56px -20px rgba(15,23,42,.18); border:2px solid; }
+.ref-slide.is-active{ display:grid; }
+@media (max-width:800px){ .ref-slide.is-active{ grid-template-columns:1fr; } }
+.ref-slide__visual{ padding:28px; background:linear-gradient(165deg,#0f172a,#1e293b 60%,#111827); display:flex; align-items:center; }
+.ref-slide__content{ padding:36px 34px; background:#fff; display:flex; flex-direction:column; }
+.ref-slide__brand{ font-family:var(--font-display); font-size:22px; font-weight:800; color:var(--navy); margin:0 0 10px; }
+.ref-slide__metric{ display:flex; align-items:baseline; gap:8px; margin-bottom:16px; }
+.ref-slide__metric-val{ font-family:var(--font-display); font-size:32px; font-weight:800; color:var(--ref-accent,var(--brand-dark)); }
+.ref-slide__metric-lbl{ font-size:13px; color:var(--text-muted); font-weight:600; }
+.ref-slide__tags{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px; padding:0; list-style:none; }
+.ref-slide__tags li{ padding:5px 12px; border-radius:999px; background:var(--cream); border:1px solid var(--border); font-size:11.5px; font-weight:700; color:var(--navy); }
+.ref-slide__summary{ font-size:14px; line-height:1.65; color:var(--text); margin-bottom:20px; }
+.ref-slide__link{ font-size:13.5px; font-weight:700; color:var(--brand-dark); margin-top:auto; }
+.ref-dots{ display:flex; justify-content:center; gap:8px; margin-top:24px; }
+.ref-dot{ width:9px; height:9px; border-radius:50%; background:var(--border); border:none; }
+.ref-dot.is-active{ background:var(--brand); width:22px; border-radius:5px; }
+
+/* ---- Markalarımız sayfası: 5 sütunlu istatistik şeridi ---- */
+.ref-stats-grid{ grid-template-columns:repeat(5,1fr) !important; }
+@media (max-width:700px){ .ref-stats-grid{ grid-template-columns:repeat(2,1fr) !important; } }
