@@ -790,3 +790,20 @@ p{ margin:0; }
 .cp-map-perks span{ padding:6px 12px; border-radius:999px; background:var(--cream); font-size:12px; font-weight:600; color:var(--navy); }
 .cp-map-embed{ border-radius:20px; overflow:hidden; min-height:320px; border:1px solid var(--border); }
 .cp-map-embed iframe{ width:100%; height:100%; min-height:320px; border:0; display:block; }
+
+/* ---- Markalarımız sayfası: Çalıştığımız Teknolojiler — dönen yörünge (orbit) görselleştirmesi ---- */
+.tech-orbit{ padding:90px 0 100px; background:#fff; }
+.tech-orbit__field{ position:relative; min-height:420px; margin-top:44px; }
+.tech-orbit__ring{ position:absolute; left:50%; top:50%; translate:-50% -50%; border-radius:50%; border:1px dashed rgba(15,23,42,.1); pointer-events:none; }
+.tech-orbit__ring--1{ width:min(90%,380px); height:min(90vw,380px); animation:tech-spin 48s linear infinite; }
+.tech-orbit__ring--2{ width:min(70%,280px); height:min(70vw,280px); animation:tech-spin 36s linear infinite reverse; }
+@keyframes tech-spin{ 100%{ rotate:360deg; } }
+.tech-orbit__core{ position:absolute; left:50%; top:50%; translate:-50% -50%; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--text-soft); text-align:center; }
+.tech-orbit__node{ position:absolute; translate:-50% -50%; display:flex; flex-direction:column; align-items:center; gap:5px; padding:11px 14px; border-radius:14px; background:#fff; box-shadow:0 12px 32px rgba(15,23,42,.1); text-decoration:none; color:var(--navy); animation:tech-node-float 5s ease-in-out infinite; transition:transform .3s, box-shadow .3s; }
+.tech-orbit__node:hover{ transform:translate(-50%, calc(-50% - 6px)) scale(1.08); box-shadow:0 20px 48px rgba(246,194,62,.28); z-index:2; }
+@keyframes tech-node-float{ 0%,100%{ translate:-50% calc(-50% + 0px); } 50%{ translate:-50% calc(-50% - 8px); } }
+.tech-orbit__icon{ width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; border-radius:8px; }
+.tech-orbit__tip{ font-size:10px; font-weight:700; white-space:nowrap; opacity:0; transition:opacity .2s; }
+.tech-orbit__node:hover .tech-orbit__tip{ opacity:1; }
+@media (max-width:700px){ .tech-orbit__field{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .tech-orbit__ring, .tech-orbit__node{ animation:none; } }
