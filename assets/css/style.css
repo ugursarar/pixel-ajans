@@ -171,36 +171,61 @@ p{ margin:0; }
   .site-nav__menu, .nav-cta{ display:none; }
   .nav-toggle{ display:flex; }
 
-  /* Mobil menü paneli — önceden .is-open eklense de gösteren bir kural hiç
-     yoktu (display:none her zaman kazanıyordu), buton bu yüzden hiçbir şey
-     yapmıyormuş gibi görünüyordu. (9 Eyl 2026 bug fix) */
+  /* Mobil menü paneli. İKİ AYRI BUG BURADAYDI (9 Eyl 2026):
+     1) .is-open eklense de onu gösteren bir kural hiç yoktu (display:none
+        her zaman kazanıyordu) — buton hiçbir şey yapmıyormuş gibiydi.
+     2) O düzeltildikten sonra GERÇEK telefonda panel sadece 1 satırlık bir
+        şeride sıkışıyordu, altından sayfa içeriği görünüyordu. Sebebi:
+        .site-nav'da backdrop-filter var, ve backdrop-filter'lı bir eleman
+        CSS'e göre içindeki position:fixed çocuklar için "containing block"
+        oluşturur — yani panel viewport'a göre değil, sadece 68px'lik
+        .site-nav kutusuna göre sabitleniyordu. Masaüstü Chrome'da (test
+        ortamımda) bu farklı davranıp fark edilmemişti, gerçek Android
+        Chrome'da ortaya çıktı. Çözüm: fixed yerine, zaten viewport'a sabit
+        olan .site-nav'a göre position:absolute kullanmak — belirsizliğe
+        hiç mahal bırakmıyor. */
   .site-nav__menu.is-open{
     display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
-    position:fixed; top:68px; left:0; right:0; bottom:0; z-index:99;
-    background:#fff; padding:8px 20px 24px; gap:2px; overflow-y:auto;
+    position:absolute; top:68px; left:0; right:0; height:calc(100vh - 68px); z-index:99;
+    background:#fff; padding:6px 0 24px; gap:0; overflow-y:auto;
     border-top:1px solid var(--border);
   }
+  .site-nav__menu.is-open .wrap{ padding:0 20px; }
+
+  /* semengineer.com referanslı sade akordeon: her grup tek satır + sağda
+     ok, açılınca altında SADE bir düz metin linki listesi (masaüstündeki
+     ikonlu/sütunlu/sidebar'lı zengin panel mobilde KALDIRILDI — küçük
+     ekranda kalabalık ve okunması zor oluyordu). */
   .site-nav__menu.is-open .nav-link{
-    width:100%; justify-content:space-between; padding:15px 2px; border-radius:0;
-    border-bottom:1px solid var(--border); font-size:15px;
+    width:100%; justify-content:space-between; padding:17px 20px; border-radius:0;
+    border-bottom:1px solid var(--border); font-size:15.5px;
   }
   .site-nav__menu.is-open a.nav-link{ text-decoration:none; }
   .site-nav__menu.is-open .nav-group{ padding-bottom:0; margin-bottom:0; }
   .site-nav__menu.is-open .nav-link svg{ transition:transform .2s ease; flex-shrink:0; }
   .nav-group.is-open > .nav-link svg{ transform:rotate(180deg); }
   .site-nav__menu.is-open .mobile-nav-cta{
-    display:flex; flex-shrink:0; width:100%; justify-content:center; margin-top:16px;
+    display:flex; flex-shrink:0; width:calc(100% - 40px); justify-content:center; margin:20px 20px 0;
   }
 
-  .mega-panel{ position:static; transform:none; width:100%; box-shadow:none; display:none; grid-template-columns:1fr; border:none; padding:6px 0 14px; }
+  .mega-panel{ position:static; transform:none; width:100%; box-shadow:none; display:none; grid-template-columns:1fr; border:none; padding:2px 0 10px; background:var(--surface); }
+  /* Zengin masaüstü içeriğini mobilde gizle, sade link listesine düş */
+  .mega-panel .mp-sidebar, .mega-panel .mp-sidebar--sectors, .mega-panel .mp-col-title, .mega-panel .mp-icon,
+  .mega-panel .mp-sector-card__icon, .mega-panel .mp-sector-card__chevron, .mega-panel .mp-sector-card__badge,
+  .mega-panel .mp-sector-card__sub, .mega-panel .mp-sectors-head{ display:none; }
+  .mega-panel .mp-row, .mega-panel .mp-sector-card, .mega-panel a{
+    display:block; padding:11px 20px; border-radius:0; font-size:14.5px; color:var(--text);
+  }
+  .mega-panel .mp-text{ display:block; }
+  .mega-panel .mp-text span{ display:none; }
+  .mega-panel .mp-services-col-title{ padding:14px 20px 6px; margin:0; }
   .mega-panel--partner{ grid-template-columns:1fr; }
   .mega-panel--services{ flex-direction:column; }
   .mega-panel--sectors{ flex-direction:column; }
-  .mp-sidebar{ width:100%; }
-  .mp-services-cols{ grid-template-columns:1fr; max-height:none; }
-  .mp-sectors-main{ max-height:none; }
-  .mp-sectors-grid{ grid-template-columns:1fr; }
-  .mp-sidebar--sectors{ width:100%; }
+  .mp-services-cols{ grid-template-columns:1fr; max-height:none; gap:0; padding:0; }
+  .mp-sectors-main{ max-height:none; padding:0; }
+  .mp-sectors-grid{ grid-template-columns:1fr; gap:0; margin-top:0; }
+  .mp-sector-card{ border:none; border-radius:0; }
 }
 
 /* ---------- Hero ---------- */

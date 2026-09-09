@@ -122,6 +122,7 @@
       </div>
       <a href="/referanslar/" class="nav-link">Markalarımız</a>
       <a href="/iletisim/" class="nav-link">İletişim</a>
+      <a href="#" class="btn btn-primary mobile-nav-cta hero-cta-btn">Ücretsiz Ön Görüşme</a>
     </nav>
     <a href="#" class="btn btn-primary nav-cta hero-cta-btn">Ücretsiz Ön Görüşme</a>
     <button class="nav-toggle" id="navToggle" aria-label="Menü">☰</button>
@@ -503,7 +504,11 @@
 (function(){
   var navToggle = document.getElementById('navToggle');
   var siteMenu = document.getElementById('siteMenu');
-  navToggle.addEventListener('click', function(){ siteMenu.classList.toggle('is-open'); });
+  navToggle.addEventListener('click', function(){
+    var open = siteMenu.classList.toggle('is-open');
+    navToggle.textContent = open ? '✕' : '☰';
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
   document.querySelectorAll('.nav-group > .nav-link').forEach(function(btn){
     btn.addEventListener('click', function(e){
       if (window.innerWidth > 980) return;
