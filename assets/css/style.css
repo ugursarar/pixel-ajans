@@ -99,6 +99,9 @@ p{ margin:0; }
 .nav-link svg{ width:14px; height:14px; opacity:.6; }
 .nav-cta{ flex-shrink:0; }
 .nav-toggle{ display:none; width:40px; height:40px; align-items:center; justify-content:center; border-radius:var(--radius-sm); border:1px solid var(--border); font-size:18px; }
+/* Mobil menü panelinin içindeki ayrı CTA — masaüstündeki .nav-cta ile karışmasın
+   diye ayrı, sadece açık panelde görünen bir öge (9 Eyl 2026). */
+.mobile-nav-cta{ display:none; }
 
 .mega-panel{
   position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%);
@@ -164,9 +167,32 @@ p{ margin:0; }
 .nav-group.is-open .mega-panel--sectors{ display:flex; }
 
 @media (max-width:980px){
+  .site-nav__bar{ justify-content:space-between; }
   .site-nav__menu, .nav-cta{ display:none; }
   .nav-toggle{ display:flex; }
-  .mega-panel{ position:static; transform:none; width:100%; box-shadow:none; display:none; grid-template-columns:1fr; }
+
+  /* Mobil menü paneli — önceden .is-open eklense de gösteren bir kural hiç
+     yoktu (display:none her zaman kazanıyordu), buton bu yüzden hiçbir şey
+     yapmıyormuş gibi görünüyordu. (9 Eyl 2026 bug fix) */
+  .site-nav__menu.is-open{
+    display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;
+    position:fixed; top:68px; left:0; right:0; bottom:0; z-index:99;
+    background:#fff; padding:8px 20px 24px; gap:2px; overflow-y:auto;
+    border-top:1px solid var(--border);
+  }
+  .site-nav__menu.is-open .nav-link{
+    width:100%; justify-content:space-between; padding:15px 2px; border-radius:0;
+    border-bottom:1px solid var(--border); font-size:15px;
+  }
+  .site-nav__menu.is-open a.nav-link{ text-decoration:none; }
+  .site-nav__menu.is-open .nav-group{ padding-bottom:0; margin-bottom:0; }
+  .site-nav__menu.is-open .nav-link svg{ transition:transform .2s ease; flex-shrink:0; }
+  .nav-group.is-open > .nav-link svg{ transform:rotate(180deg); }
+  .site-nav__menu.is-open .mobile-nav-cta{
+    display:flex; flex-shrink:0; width:100%; justify-content:center; margin-top:16px;
+  }
+
+  .mega-panel{ position:static; transform:none; width:100%; box-shadow:none; display:none; grid-template-columns:1fr; border:none; padding:6px 0 14px; }
   .mega-panel--partner{ grid-template-columns:1fr; }
   .mega-panel--services{ flex-direction:column; }
   .mega-panel--sectors{ flex-direction:column; }
